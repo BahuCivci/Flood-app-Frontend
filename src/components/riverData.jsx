@@ -63,7 +63,7 @@ const RiverLabelData = (props) => {
         stations: newStations,
       }
       const response = await axios.post(
-        `notification/send-alert`,
+        `${BASE_URL}notification/send-alert`,
         myContent,
         config
       )

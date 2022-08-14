@@ -22,7 +22,7 @@ const Login = () => {
       password,
     }
     try {
-      const response = await axios.post( "user/login", body)
+      const response = await axios.post(BASE_URL + "user/login", body)
       localStorage.setItem("token", response.data.token)
       alert("Login successful")
       navigate("/map-view")

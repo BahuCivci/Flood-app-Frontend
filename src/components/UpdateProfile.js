@@ -52,7 +52,7 @@ const UpdateProfile = () => {
     }
     try {
       const response = await axios.post(
-        `user/update-work-location`,
+        `${BASE_URL}user/update-work-location`,
         {
           workLocation: userWorkLocation,
         },
@@ -82,7 +82,7 @@ const UpdateProfile = () => {
 
   const getWorkLocation = async () => {
     try {
-      const response = await axios.get(`user/work-location`, {
+      const response = await axios.get(`${BASE_URL}user/work-location`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -97,7 +97,7 @@ const UpdateProfile = () => {
     setSubscriptionLoading(true)
     try {
       const response = await axios.get(
-        `user/get-work-subscription`,
+        `${BASE_URL}user/get-work-subscription`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -126,7 +126,7 @@ const UpdateProfile = () => {
     setSubscriptionLoading(true)
     try {
       const response = await axios.post(
-        `user/subscribe-for-work-notifications`,
+        `${BASE_URL}user/subscribe-for-work-notifications`,
         {
           subscription: subscribed,
         },

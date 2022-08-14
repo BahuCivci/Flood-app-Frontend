@@ -52,30 +52,30 @@ const HomePage = () => {
 
   const getNearyByLocation = async () => {
     const token = localStorage.getItem("token")
-
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
-    if (token) {
-      try {
-        const { data } = await axios.get(`user/nearby-location`, config)
-        console.log(data, "== data")
-        if (data.river) {
-          setNearbyRiver({
-            river: data.river,
-            exists: true,
-          })
-        } else {
-          setNearbyRiver({
-            exists: false,
-            msg: data.msg,
-          })
-        }
-      } catch (error) {
-        console.log(error)
+    try {
+      const { data } = await axios.get(
+        `${BASE_URL}user/nearby-location`,
+        config
+      )
+      console.log(data, "== data")
+      if (data.river) {
+        setNearbyRiver({
+          river: data.river,
+          exists: true,
+        })
+      } else {
+        setNearbyRiver({
+          exists: false,
+          msg: data.msg,
+        })
       }
+    } catch (error) {
+      console.log(error)
     }
   }
   useEffect(() => {
@@ -102,7 +102,7 @@ const HomePage = () => {
         console.log("== Longitude is :", position.coords.longitude)
         axios
           .post(
-            `user/update-location`,
+            `${BASE_URL}user/update-location`,
             {
               location: {
                 latitude: position.coords.latitude,
@@ -133,20 +133,18 @@ const HomePage = () => {
 
   const getSubscription = async () => {
     setSubscriptionLoading(true)
-    if (token) {
-      try {
-        const response = await axios.get(`user/get-subscription`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        setDbSubscription(response.data.subscription)
-        setSubscriptionLoading(false)
-        return response.data.subscribed
-      } catch (error) {
-        console.log(error)
-        setSubscriptionLoading(false)
-      }
+    try {
+      const response = await axios.get(`${BASE_URL}user/get-subscription`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setDbSubscription(response.data.subscription)
+      setSubscriptionLoading(false)
+      return response.data.subscribed
+    } catch (error) {
+      console.log(error)
+      setSubscriptionLoading(false)
     }
   }
 
@@ -158,7 +156,7 @@ const HomePage = () => {
     setSubscriptionLoading(true)
     try {
       const response = await axios.post(
-        `user/subscribe-for-notifications`,
+        `${BASE_URL}user/subscribe-for-notifications`,
         {
           subscription: subscribed,
         },

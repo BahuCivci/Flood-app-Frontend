@@ -24,7 +24,7 @@ const Register = () => {
       password,
     }
     try {
-      const response = await axios.post("user/register", body)
+      const response = await axios.post(BASE_URL + "user/register", body)
       localStorage.setItem("token", response.data.token)
       alert("Register successful")
       navigate("/")
