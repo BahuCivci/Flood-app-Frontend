@@ -65,7 +65,7 @@ const Navbar = () => {
                   onClick={(e) => {
                     e.preventDefault()
                     localStorage.removeItem("token")
-                    window.location.reload()
+                    window.location.href = "/login"
                   }}
                 >
                   Logout

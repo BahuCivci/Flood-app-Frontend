@@ -173,7 +173,13 @@ const UpdateProfile = () => {
       <form onSubmit={updateProfile}>
         <div>
           <label>
-            The River you subscribed is <strong>{userWorkLocation}</strong>
+            {subscribed ? (
+              <>
+                The River you subscribed is <strong>{userWorkLocation}</strong>
+              </>
+            ) : (
+              "You're not subscribed to any River"
+            )}
           </label>
         </div>
         <br />
